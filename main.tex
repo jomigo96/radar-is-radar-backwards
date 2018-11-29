@@ -1,0 +1,36 @@
+% arara: xelatex: { synctex: yes, shell: yes }
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[palatino,portuguese]{ist-report}
+
+\usepackage{csquotes}
+\usepackage{fvextra}
+\usepackage{biblatex}
+\addbibresource{main.bib}
+
+\usepackage{siunitx}
+
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+\usepackage{booktabs}
+
+\setgraphicspath{{graphics/}}
+
+\author{Daniel de Schiffart \\ \texttt{81479} \and João Gonçalves \\ \texttt{81040}}
+\title{Radar MIMO}
+\subtitle{}
+\course{Mestrado Integrado em Engenharia Aeroespacial}
+\subject{Sistemas de Radar}
+
+\begin{document}
+
+\makecover
+
+{\hypersetup{linkcolor={black}} \tableofcontents}
+
+\begin{abstract}
+	Neste trabalho vamos tratar de radares multi-estáticos MIMO, acrónimo para \textit{Multiple-Input Multiple-Output}.
+\end{abstract}
+
+\end{document}
