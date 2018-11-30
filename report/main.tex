@@ -1,0 +1,82 @@
+% arara: xelatex: { synctex: yes, shell: yes }
+% arara: biber
+% arara: xelatex: { synctex: yes, shell: yes }
+
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[purist,portuguese]{ist-report}
+
+\input{preamble.tex}
+\addbibresource{main.bib}
+
+\author{Daniel de Schiffart \\ \texttt{81479} \and João Gonçalves \\ \texttt{81040}}
+\title{Radar MIMO}
+\subtitle{}
+\course{Mestrado Integrado em Engenharia Aeroespacial}
+\subject{Sistemas de Radar}
+
+\begin{document}
+
+\makecover
+
+\todo{Não tenho spellcheck, fazer isso no fim!}
+\todo{É preciso arranjar muitas imagens, mas não encontro nada de jeito.}
+
+{\hypersetup{linkcolor={black}} \tableofcontents}
+
+\newpage
+
+\begin{abstract}
+	Neste trabalho vamos tratar de radares multi-estáticos MIMO, acrónimo para \textit{Multiple-Input Multiple-Output}.
+\end{abstract}
+
+\section{Introdução}
+
+Este trabalho é baseado em \cite{davis2015mimo} e \cite{li2018mimo}.\todo{Obviamente que não dizemos isto assim, mas o texto vem 100\% dali, não podemos citar a cada parágrafo.}
+
+Neste trabalho, é apresentada uma visão global sobre o radar MIMO, detalhando as suas principais características, história, desenvolvimentos em curso e aplicações.
+
+\section{Definição}
+
+Um sistema de radar ativo emite energia eletromagnética para analisar o ambiente.
+Um radar MIMO usa vários elementos emissores e transmite várias formas de onda não correlacionadas, de maneira que um recetor pode atribuir a cada sinal o seu emissor. 
+Em termos práticos, os emissores podem estar substancialmente afastados, designando-se radar MIMO não coerente ou estatístico, por razões estudadas mais à frente.
+Se, por outro lado, os emissores se encontrarem próximos uns dos outros, possivelmente na mesma plataforma ou agregado, então o sistema é designado de radar MIMO coerente.
+
+\subsection{MIMO coerente e não coerente}
+
+No radar MIMO \textbf{coerente}, a colocação das antenas não difere do radar convencional, tal que as antenas de emissão e receção partilham o ângulo de observação a um alvo distante.
+Uma consequência é que a RCS (\textit{radar cross-section}) será praticamente constante
+
+Este tipo pode ser visto como uma generalização do radar monoestático.
+\todo{As fontes estão bué confusas aqui, mas isto é importante}
+
+No radar MIMO \textbf{não coerente}, os transmissores e receptores são necessariamente antenas separadas, colocadas em diferentes posições numa certa área, tal que os ângulos de observação ao alvo são diferentes para cada elemento.
+
+\section{Perspetiva Histórica}
+
+Em telecomunicações, técnicas MIMO são usadas desde os anos 90, pois apresentam um conjunto de vantagens em relação ao tradicional SISO (\textit{Single-input Single-output}).
+Em primeiro lugar, aumenta a eficiência espectral, isto é, a quantidade de informação transmitida por segundo e por hertz para uma potência fixa. 
+Além disso, melhora-se a robustez ao desvanescimento, pela informação poder ser enviada de emissores não correlacionados.
+
+Em contrapartida à metodologia SISO em que se transmite toda a energia num só percurso de comunicação, as comunicações MIMO permitem explorar a diversidade espacial, já que o desvanescimento actua independentemente para cada transmissor.
+Assim, o SNR (\textit{signal-to-noise ratio}) no recetor não depende dramaticamente do desvanescimento dos canais individuais.
+
+Em essência, para comunicações em MIMO, a informação transmitida é desconhecida, mas os canais são conhecidos, e até estáticos. Para o radar MIMO, as formas de onda emitidas são conhecidas, mas o ambiente, como a presença de \textit{clutter} ou \textit{jamming}, não o são.
+
+A motivação para o aplicar o conceito MIMO a radares foi mesmo a ideia de diversidade espacial, que permitiria ultrapassar a sintilação dos alvos através de transmissões não correlacionadas.
+Contudo, a ideia não se restringe ao uso de vários elementos radiadores.
+De facto, agregados de fase \todo{É esta a tradução de phased arrays?} são usados à muito tempo para detectar alvos pequenos a grandes distâncias.
+A diferença é que neste caso os sinais de saída só diferem na fase entre si de maneira a guiar um lobo de ganho elevado. 
+Estes sinais são então correlacionados e não oferecem mais nenhum grau de liberdade.
+
+\todo{Mais a ser escrito aqui}
+
+O primeiro protocolo de radar MIMO foi desenvolvido nos anos 90, tem o nome de \textit{Synthetic pulse and Antenna Radar}, usa um agregado que alimenta cada elemento de antena com um sinal específico, tal que o recetor é irradiado com vários lobos. 
+
+
+
+\section{Pesquisa em radar MIMO}
+
+\printbibliography
+\listoftodos
+\end{document}
