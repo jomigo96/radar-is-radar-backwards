@@ -8,6 +8,9 @@
 \input{preamble.tex}
 \addbibresource{main.bib}
 
+\usepackage{newtxsf}
+%\usepackage[math]{iwona}
+
 \author{Daniel de Schiffart \\ \texttt{81479} \and João Gonçalves \\ \texttt{81040}}
 \title{Radar MIMO}
 \subtitle{}
@@ -47,7 +50,7 @@ Se, por outro lado, os emissores se encontrarem próximos uns dos outros, possiv
 No radar MIMO \textbf{coerente}, a colocação das antenas não difere do radar convencional, tal que as antenas de emissão e receção partilham o ângulo de observação a um alvo distante.
 Uma consequência é que a RCS (\textit{radar cross-section}) será praticamente constante
 
-Este tipo pode ser visto como uma generalização do radar monoestático.
+Este tipo pode ser visto como uma generalização do radar mono-estático.
 \todo{As fontes estão bué confusas aqui, mas isto é importante}
 
 No radar MIMO \textbf{não coerente}, os transmissores e receptores são necessariamente antenas separadas, colocadas em diferentes posições numa certa área, tal que os ângulos de observação ao alvo são diferentes para cada elemento.
@@ -56,14 +59,14 @@ No radar MIMO \textbf{não coerente}, os transmissores e receptores são necessa
 
 Em telecomunicações, técnicas MIMO são usadas desde os anos 90, pois apresentam um conjunto de vantagens em relação ao tradicional SISO (\textit{Single-input Single-output}).
 Em primeiro lugar, aumenta a eficiência espectral, isto é, a quantidade de informação transmitida por segundo e por hertz para uma potência fixa. 
-Além disso, melhora-se a robustez ao desvanescimento, pela informação poder ser enviada de emissores não correlacionados.
+Além disso, melhora-se a robustez ao desvanecimento, pela informação poder ser enviada de emissores não correlacionados.
 
-Em contrapartida à metodologia SISO em que se transmite toda a energia num só percurso de comunicação, as comunicações MIMO permitem explorar a diversidade espacial, já que o desvanescimento actua independentemente para cada transmissor.
-Assim, o SNR (\textit{signal-to-noise ratio}) no recetor não depende dramaticamente do desvanescimento dos canais individuais.
+Em contrapartida à metodologia SISO em que se transmite toda a energia num só percurso de comunicação, as comunicações MIMO permitem explorar a diversidade espacial, já que o desvanecimento actua independentemente para cada transmissor.
+Assim, o SNR (\textit{signal-to-noise ratio}) no recetor não depende dramaticamente do desvanecimento dos canais individuais.
 
 Em essência, para comunicações em MIMO, a informação transmitida é desconhecida, mas os canais são conhecidos, e até estáticos. Para o radar MIMO, as formas de onda emitidas são conhecidas, mas o ambiente, como a presença de \textit{clutter} ou \textit{jamming}, não o são.
 
-A motivação para o aplicar o conceito MIMO a radares foi mesmo a ideia de diversidade espacial, que permitiria ultrapassar a sintilação dos alvos através de transmissões não correlacionadas.
+A motivação para o aplicar o conceito MIMO a radares foi mesmo a ideia de diversidade espacial, que permitiria ultrapassar a cintilação dos alvos através de transmissões não correlacionadas.
 Contudo, a ideia não se restringe ao uso de vários elementos radiadores.
 De facto, agregados de fase \todo{É esta a tradução de phased arrays?} são usados à muito tempo para detectar alvos pequenos a grandes distâncias.
 A diferença é que neste caso os sinais de saída só diferem na fase entre si de maneira a guiar um lobo de ganho elevado. 
@@ -76,6 +79,22 @@ O primeiro protocolo de radar MIMO foi desenvolvido nos anos 90, tem o nome de \
 
 
 \section{Pesquisa em radar MIMO}
+
+\section{Exemplos de Aplicações}
+
+\subsection{Aplicação a Sistemas de Imagens por Radar}
+
+A captação de imagens de grandes superfícies geográficas de alta resolução é um campo de elevada relevância e dificuldade devido à escala considerada e a atenuação óptica da atmosfera para grandes distâncias e altitudes necessárias para captação eficiente das superfícies mencionadas.
+
+Desde cedo se relevou uma aplicação útil da tecnologia radar. Colocando radares a altitudes elevadas para o propósito, os sinais emitidos são refletidos pela superfície terrestre e são captados pelo radar com propriedades diferentes dependendo da superfície atingida, permitindo ao radar obter informação sobre a composição de determinadas zonas captadas no seu alcance.
+
+Em comparação a fotografia óptica, que para a escala considerada tem o seu alcance diminuído não só por obstáculos atmosféricos como nuvens, tempestades, ou outros fenómenos meteorológicos, como também pela composição da atmosfera em si, os sinais de rádio emitidos por radares são muito menos afetados por este tipo de interferências.
+
+Devido a estas vantagens, a criação de imagens de grandes superfícies e a sua aplicação em mapeamento terrestre, monitorização ambiental e sistemas de reconhecimento militar é frequentemente auxiliada por sistemas de radares próprios para o efeito.
+
+\subsubsection{Radar de Abertura Sintética}
+
+O \textsc{Radar de Abertura Sintética}, doravante referido pela sigla inglesa SAR, é um sistema de radar aéreo ou espacial que beneficia do seu movimento para obter vários sinais diferentes ao longo da sua trajetória, juntando-os para criar um resultado final. \todo{Falta relacionar tudo com o MIMO}
 
 \printbibliography
 \listoftodos
