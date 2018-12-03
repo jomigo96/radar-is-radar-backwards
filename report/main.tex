@@ -151,9 +151,29 @@ Como observado, transmitir formas de onda ortogonais origina centros de fase adi
 Em primeiro lugar, o \textit{spatial sampling rate}\todo{Preciso de tradução disto e talvez incluir uma definição} pode ser aumentado por um fator de $M$ face ao agregado de fase, o que é útil para imagiamento com abertura sintética.\todo{Verificar esta tradução}
 Em segundo, exitem benifícios ao nível da resolução angular quando se aumenta o tamanho do agregado virtual.
 
+\subsubsection{Formas de Onda Ortogonais}
+
+Na presente secção, menciona-se que cada elemento emissor deve usar formas de onda ortogonais entre si, o que pode ser atingido de várias maneiras.
+Uma proposta, é usar \textit{spectrally interleaved multi-carrier system} de \cite{sturm2013spectrally}, onde cada \textit{subcarrier} é distribuída em antenas espaçadas.
+As formas de onda são ortogonais para este método se 
+\begin{align}
+  f_n = n\Delta f = \frac{n}{T}, \; n=0,\ldots,N_c -1,
+  \label{eq:orth}
+\end{align}
+onde $f_n$ são as frequências de \textit{subcarriers}, $T$ é a duração de símbolo de OFDM \footnote{Orthogonal fequency-division multiplexing}, e $N_c$ o número de \textit{subcarriers}.
+
+Outro método é usar um sinal \textit{chirp} ortogonal de \cite{chen2008mimo}, expresso como
+\begin{align}
+  x_m(t)= exp\left( 2\pi \left( f_{m,0}t+\frac{1}{2}kt^2 \right) \right).
+  \label{eq:chirp}
+\end{align}
+Os sinais podem ser tornados ortogonais escolhendo adequadamente $f_{m,0}$ e $k$.
+
 \todo[inline]{Subsecção sobre coarray, se me apetecer}
 
 \section{Processamento de Sinais para radar MIMO}
+
+
 
 \section{Exemplos de Aplicações}
 
