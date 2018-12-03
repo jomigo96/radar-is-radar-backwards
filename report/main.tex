@@ -38,6 +38,8 @@ Este trabalho é baseado em \cite{davis2015mimo} e \cite{li2018mimo}.\todo{Obvia
 
 Neste trabalho, é apresentada uma visão global sobre o radar MIMO, detalhando as suas principais características, história, desenvolvimentos em curso e aplicações.
 
+Uma nota sobre nomenclatura, ao longo deste trabalho usam-se símbolos minísculos a negrito para designar vetores, como $\mathbf{x}(t)$, maiúsculos a negrito para designar matrizes, como $\mathbf{H}(t)$, e os símbolos a fonte normal são, a não ser que referido o contrário, unidimensionais.
+
 \section{Definição}
 
 Um sistema de radar ativo emite energia eletromagnética para analisar o ambiente.
@@ -48,7 +50,7 @@ Se, por outro lado, os emissores se encontrarem próximos uns dos outros, possiv
 \subsection{MIMO coerente e não coerente}
 
 No radar MIMO \textbf{coerente}, a colocação das antenas não difere do radar convencional, tal que as antenas de emissão e receção partilham o ângulo de observação a um alvo distante.
-Uma consequência é que a RCS (\textit{radar cross-section}) será praticamente constante
+Uma consequência é que a RCS (\textit{radar cross-section}) será praticamente constante.
 
 Este tipo pode ser visto como uma generalização do radar mono-estático.
 \todo{As fontes estão bué confusas aqui, mas isto é importante}
@@ -79,6 +81,46 @@ O primeiro protocolo de radar MIMO foi desenvolvido nos anos 90, tem o nome de \
 
 
 \section{Pesquisa em radar MIMO}
+
+\section{Radar MIMO}
+
+\subsection{Princípos de comunicações MIMO e radar}
+
+A meta de qualquer sistema de radar é inferir uma propriedade do ambiente a partir das características das ondas eletromagnéticas transmitidas.
+Os sistemas de radar são normalmente modelados linearmente, com a entrada sendo o sinal irradiado, e a saída o sinal recebido. 
+Para o caso SISO, denomeia-se $x(t)$ a representação complexa do sinal de entrada transportado na frequência $\omega_c$, $(t)$ a saída, $h(t)$ a resposta impulsiva e $v(t)$ o ruído no recetor.
+A resposta pode ser dada por:
+\begin{align}
+  y(t) = \int_0^\infty h(\tau)e^{-i\omega_c\tau}(t-\tau)d\tau + v(t).
+  \label{eq:linearsiso}
+\end{align}
+
+No caso das telecomunicações, $h(t)$ é função do canal de comunicações, enquanto que para o problema de radar monoestático pode ser chamada de \textit{range profile}.
+Para qualquer dos casos, $h(t)$ pode ser construído pelo sinal medido de um certo número de recetores, que chegam com o mesmo atraso $\tau$, mas com diferentes ângulos de chegada $\theta$:
+\begin{align}
+  h(\tau) = \int_{-\pi}^{\pi}\alpha(\tau,\theta)d\theta.
+  \label{eq:profile}
+\end{align}
+%Para o radar, o objetivo pode ser estimar este par ângulo/atraso.
+
+No caso MIMO, é usado um conjunto de sinais de entrada, $\mathbf{x}(t)\in\mathbb{C}^M$, e um conjunto de sinais de saída, $\mathbf{y}(t)\in\mathbb{C}^N$.
+O modelo da equação \ref{eq:linearsiso} pode ser expandido para:
+\begin{align}
+  \mathbf{y}(t) = \int_0^\infty \mathbf{H}(\tau)e^{-i\omega_C \tau}\mathbf{x}(t-\tau)d\tau + \mathbf{v}(t),
+  \label{eq:linearmimo}
+\end{align}
+onde $H(t)$ é uma matriz $N\times M$ que descreve a resposta dos $MN$ canais do sistema MIMO.
+Os ganhos ao usar MIMO são dependentes da informação adicional dada por $\mathbf{H}$, de facto, se esta for mal condicionada, as vantagens são limitadas. 
+Nas telecomunicações, procura-se explorar a diversidade espacial dada pelos $MN$ canais, o que pode ser visto como garantir redundâncias, para pelo menos um caminho esteja disponível.
+Aliás, antenas recetoras distanciadas de apenas um comprimento de onda podem receber sinais completamente independentes que transportam informação redundante.
+
+No caso de um radar MIMO coerente e um único alvo, as antenas estão tão perto que observam a mesma reflectividade, e a única diferença será um desvio de fase que está relacionado com o ângulo de incidência.
+
+Embora existam muitas semelhanças entre radar e telecomunicações MIMO, a meta nas comunicações é maximizar SNR no recetor, enquanto que para o radar é optimizar as outras propriedades da antena, eventualmente ao custo de reduzir SNR.
+A análise seguinte mostra como o processamento coerente dos sinais de um sistema de radar MIMO pode ser usado para melhorar o desempenho do sistema.
+
+\subsection{Agregado virtual MIMO}
+
 
 \section{Exemplos de Aplicações}
 
