@@ -16,6 +16,7 @@
 \subtitle{}
 \course{Mestrado Integrado em Engenharia Aeroespacial}
 \subject{Sistemas de Radar}
+\date{Dezembro de 2018}
 
 \begin{document}
 
@@ -44,6 +45,8 @@ Uma nota sobre nomenclatura, ao longo deste trabalho usam-se símbolos miníscul
 
 Um sistema de radar ativo emite energia eletromagnética para analisar o ambiente.
 Um radar MIMO usa vários elementos emissores e transmite várias formas de onda não correlacionadas, de maneira que um recetor pode atribuir a cada sinal o seu emissor. 
+Pode portanto ser classificado como uma subdivisão de radar multiestático, em que as formas de onda utilizadas não são coerentes, tal que em cada pode ser feita a distinção da fonte dos sinais recebidos.
+
 Em termos práticos, os emissores podem estar substancialmente afastados, designando-se radar MIMO não coerente ou estatístico, por razões estudadas mais à frente.
 Se, por outro lado, os emissores se encontrarem próximos uns dos outros, possivelmente na mesma plataforma ou agregado, então o sistema é designado de radar MIMO coerente.
 
@@ -116,11 +119,41 @@ Aliás, antenas recetoras distanciadas de apenas um comprimento de onda podem re
 
 No caso de um radar MIMO coerente e um único alvo, as antenas estão tão perto que observam a mesma reflectividade, e a única diferença será um desvio de fase que está relacionado com o ângulo de incidência.
 
-Embora existam muitas semelhanças entre radar e telecomunicações MIMO, a meta nas comunicações é maximizar SNR no recetor, enquanto que para o radar é optimizar as outras propriedades da antena, eventualmente ao custo de reduzir SNR.
+Embora existam muitas semelhanças entre radar e telecomunicações MIMO, a meta nas comunicações é maximizar SNR no recetor, enquanto que para o radar é optimizar as outras propriedades da antena, eventualmente com o custo de reduzir SNR.
 A análise seguinte mostra como o processamento coerente dos sinais de um sistema de radar MIMO pode ser usado para melhorar o desempenho do sistema.
 
-\subsection{Agregado virtual MIMO}
+\subsection{Agregado Virtual MIMO}
 
+Um radar MIMO que transmite formas de onda ortogonais pode ser analisado como um agregado virtual.
+Trata-se de usar $M$ elementos a transmitir e $N$ elementos usados na recepção, tal que se têm $NM$ elementos virtuais.
+
+Vamos considerar um agregado uni-dimensional, com a posição relativa de cada elemento em relação a um centro arbitrário representada por $x$. 
+Adicionalmente, $x_T$ e $x_R$ denotam um elemento transmissor e recetor, respetivamente.
+O agregado virtual MIMO correspondente é:
+\begin{align}
+  \left\{ \frac{x_{Tm}+x_{Rn}}{2}:\; m=1,\ldots,M;\,n=1,\ldots,N \right\}.
+  \label{eq:virtualmimo}
+\end{align}
+Esta construção é feita considerando cada par pseudo-biestático\footnote{O termo pseudo-biestático significa no caso de MIMO coerente que o ângulo biestático é assumido ser pequeno, ie, os elementos transmissores e recetores estão próximos.} entre elementos transmissores e recetores, notando que cada emissor deve utilizar formas de ondas ortogonais.
+
+Na figura \ref{fig:virt1} \emph{a)} observa-se o agregado de fase, em que as formas de onda estão perfeitamente correlacionadas, o que implica existirem $N$ centros de fase.
+Na figura \ref{fig:virt1} \emph{b)}, usam-se formas de onda não correlacionadas, o que produz $NM$ centros de fase virtuais, embora não todos distintos.
+Se o objetivo for obter um agregado virtual contínuo, tal é possível separando os elementos transmissores, como na figura \ref{fig:virt1} \emph{c)}. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=7cm]{virt1.png}
+  \caption{Agregados virtuais equivalentes.}
+  \label{fig:virt1}
+\end{figure}
+
+Como observado, transmitir formas de onda ortogonais origina centros de fase adicionais, o que traz duas vantagens.
+Em primeiro lugar, o \textit{spatial sampling rate}\todo{Preciso de tradução disto e talvez incluir uma definição} pode ser aumentado por um fator de $M$ face ao agregado de fase, o que é útil para imagiamento com abertura sintética.\todo{Verificar esta tradução}
+Em segundo, exitem benifícios ao nível da resolução angular quando se aumenta o tamanho do agregado virtual.
+
+\todo[inline]{Subsecção sobre coarray, se me apetecer}
+
+\section{Processamento de Sinais para radar MIMO}
 
 \section{Exemplos de Aplicações}
 
