@@ -112,7 +112,7 @@ O modelo da equação \ref{eq:linearsiso} pode ser expandido para:
   \mathbf{y}(t) = \int_0^\infty \mathbf{H}(\tau)e^{-i\omega_C \tau}\mathbf{x}(t-\tau)d\tau + \mathbf{v}(t),
   \label{eq:linearmimo}
 \end{align}
-onde $H(t)$ é uma matriz $N\times M$ que descreve a resposta dos $MN$ canais do sistema MIMO.
+onde $\mathbf{H}(t)$ é uma matriz $N\times M$ que descreve a resposta dos $MN$ canais do sistema MIMO.
 Os ganhos ao usar MIMO são dependentes da informação adicional dada por $\mathbf{H}$, de facto, se esta for mal condicionada, as vantagens são limitadas. 
 Nas telecomunicações, procura-se explorar a diversidade espacial dada pelos $MN$ canais, o que pode ser visto como garantir redundâncias, para pelo menos um caminho esteja disponível.
 Aliás, antenas recetoras distanciadas de apenas um comprimento de onda podem receber sinais completamente independentes que transportam informação redundante.
@@ -173,6 +173,65 @@ Os sinais podem ser tornados ortogonais escolhendo adequadamente $f_{m,0}$ e $k$
 
 \section{Processamento de Sinais para radar MIMO}
 
+Considere-se um radar MIMO que transmite $M$ formas de onda independentes, possivelmente de vários elementos emissores, ou de agregados, desde que cada sinal tenha um centro de fase distinto.
+Os sinais são refletidos no ambiente e observados por $N$ recetores, que podem ou não ser os mesmos usados na transmissão.
+Este caso está esquematizado na figura \ref{fig:rad3}.
+
+\begin{figure}[hp]
+  \centering
+  \includegraphics[width=0.8\linewidth]{rad3.png}
+  \caption{Modelo de um radar MIMO com $N=M=3$}
+  \label{fig:rad3}
+\end{figure}
+
+Com algumas assumpções,\todo{Especificar?} pode admitir-se que os sinais observados por cada elemento são idênticos a menos de um desvio em fase.
+Seja $x_m(t)$ o sinal emitido pelo elemento $m$ e $y_n$ o sinal observado no elemento $n$, de um alvo com ângulo $\theta_0$, então pode escrever-se:
+\begin{align}
+  y_n(t,\theta) = \alpha b_n(\theta_0) \sum_{m=1}^{M}a_m(\theta_0)x_m(t) + v_n(t),
+  \label{eq:proc1}
+\end{align}
+onde $\alpha$ é um coeficiente de \textit{backscatter}, $a_m$ e $b_n$ são os desvios de fase na transmissão e recepção, respetivamente.
+
+Estes desvios de fase podem ser tratados como vetores $\mathbf{a} \in \mathbb{C}^M$ e $\mathbf{b} \in \mathbb{C}^N$.
+Assim, a equação \ref{eq:proc1} toma uma forma mais compacta:
+\begin{align}
+  \mathbf{y}(t,\theta_0) = \alpha\mathbf{b}(\theta_0)\mathbf{a}(\theta_0)^T\mathbf{x}(t)+\mathbf{v_t}.
+  \label{eq:radc}
+\end{align}
+A interpretação de que os sinais recebidos por um radar MIMO são a combinação linear dos sinais transmitidos leva à definição de $\mathbf{H}$ como
+\begin{align}
+  \mathbf{H}(\theta) \coloneqq \mathbf{b}(\theta)\mathbf{a}(\theta)^T,
+  \label{eq:H}
+\end{align}
+que depende explicitamente do ângulo $\theta$.
+
+Um radar MIMO aplica filtros adaptados, com a hipótese comum de todas as formas de onda serem ortogonais, o que implica que cada filtro vai selecionar um e um só sinal, descartando o resto.
+Cada recetor terá $M$ destes filtros, o que é visível na figura \ref{fig:proc} ainda para o caso $M=N=3$.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[height=7cm]{processor.png}
+  \caption{Processamento de sinais em radar MIMO.}
+  \label{fig:proc}
+\end{figure}
+
+O resultado desta filtragem é a matriz $N\times M$:
+\begin{align}
+  \begin{aligned}
+    \mathbf{Z}(\theta_0) &= \int_{-\infty}^{\infty} \mathbf{y}(t,\theta_0)\mathbf{x}(t)^Hdt \\
+	&= \alpha \mathbf{H}(\theta_0)\mathbf{R}_x + \mathbf{E} ,
+  \end{aligned}
+  \label{eq:Z}
+\end{align}
+com $\mathbf{R}_x$ a matriz de correlação dos sinais de entrada e $\mathbf{E}$ o ruído no filtro.
+
+Pode ser mostrado que o $SNR$ obtido com este processamento é inferior ao do radar convencional por um fator de $\frac{1}{M^2}$, o que deve ser compensado com processamento coerente.
+Com este, usando um \textit{threshold} $\gamma$, a saída do filtro terá uma distribuição gaussiana com média nula, e a deteção um distribuição exponencial, de onde seguem as probabilidades de deteção e falso alarme:
+\begin{align}
+  p_d &= exp\left( -\frac{\gamma}{\sigma_t^2 + \sigma_n^2} \right) \label{eq:pd} \\
+  p_{fa} &= exp\left( -\frac{\gamma}{\sigma_n^2} \right) \label{eq:pfa},
+\end{align}
+onde $\sigma_t^2$ e $\sigma_n^2$ são as potências do alvo e interferência (\textit{clutter} mais ruído), respetivamente.
 
 
 \section{Exemplos de Aplicações}
