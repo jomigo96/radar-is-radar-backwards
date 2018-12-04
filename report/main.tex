@@ -1,7 +1,7 @@
 % arara: xelatex: { synctex: yes, shell: yes }
 % arara: biber if (missing("bbl") || changed("bib"))
 % arara: xelatex if (missing("bbl") || changed("bbl"))
-% arara: xelatex if (found("log", "Label(s) may have changed."))
+% arara: xelatex if (found("log", "Rerun to get cross-references right."))
 
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass[purist,portuguese]{ist-report}
@@ -42,7 +42,7 @@
 
 Neste trabalho, é apresentada uma visão global sobre o radar MIMO, detalhando as suas principais características, história, desenvolvimentos em curso e aplicações.
 
-Uma nota sobre nomenclatura, ao longo deste trabalho usam-se símbolos minísculos a negrito para designar vetores, como $\mathbf{x}(t)$, maiúsculos a negrito para designar matrizes, como $\mathbf{H}(t)$, e os símbolos a fonte normal são, a não ser que referido o contrário, unidimensionais.
+Uma nota sobre nomenclatura, ao longo deste trabalho usam-se símbolos minúsculos a negrito para designar vetores, como $\mathbf{x}(t)$, maiúsculos a negrito para designar matrizes, como $\mathbf{H}(t)$, e os símbolos a fonte normal são, a não ser que referido o contrário, unidimensionais.
 
 \section{Definição}
 
@@ -81,12 +81,12 @@ No radar MIMO \textbf{não coerente}, os transmissores e receptores são necessa
 
 \section{Perspetiva Histórica}
 
-Em telecomunicações, técnicas MIMO são usadas desde os anos 90, pois apresentam um conjunto de vantagens em relação ao tradicional SISO (\textit{Single-input Single-output}).
+Em telecomunicações, técnicas MIMO são usadas desde os anos 90, pois apresentam um conjunto de vantagens em relação ao tradicional SISO (\textit{Single-Input Single-Output}).
 Em primeiro lugar, aumenta a eficiência espectral, isto é, a quantidade de informação transmitida por segundo e por hertz para uma potência fixa. 
 Além disso, melhora-se a robustez ao desvanecimento, pela informação poder ser enviada de emissores não correlacionados.
 
 Em contrapartida à metodologia SISO em que se transmite toda a energia num só percurso de comunicação, as comunicações MIMO permitem explorar a diversidade espacial, já que o desvanecimento actua independentemente para cada transmissor.
-Assim, o SNR (\textit{signal-to-noise ratio}) no recetor não depende dramaticamente do desvanecimento dos canais individuais.
+Assim, o SNR (\textit{Signal-to-Noise Ratio}) no recetor não depende dramaticamente do desvanecimento dos canais individuais.
 
 Em essência, para comunicações em MIMO, a informação transmitida é desconhecida, mas os canais são conhecidos, e até estáticos. Para o radar MIMO, as formas de onda emitidas são conhecidas, mas o ambiente, como a presença de \textit{clutter} ou \textit{jamming}, não o são.
 
@@ -100,7 +100,7 @@ Estes sinais são então correlacionados e não oferecem mais nenhum grau de lib
 
 O radar MIMO trata-se de uma tecnologia emergente, com centenas de artigos publicados nos últimos 15 anos, e com o primeiro sistema a aplicar este conceito desenvolvido nos anos 90.
 Contudo, é tomado com algum ceticismo, já que o seu uso em certas aplicações degrada substancialmente o desempenho de sistemas convencionais.
-As aplicações onde o radar MIMO supera os sistemas convencionais são \textit{airborne surface surveillance} e \textit{over-the-horizon radars}.
+As aplicações onde o radar MIMO supera os sistemas convencionais são \textit{airborne surface surveillance} e \textit{Over-The-Horizon radars}.
 
 \section{Radar MIMO}
 
@@ -165,7 +165,7 @@ Se o objetivo for obter um agregado virtual contínuo, tal é possível separand
 \end{figure}
 
 Como observado, transmitir formas de onda ortogonais origina centros de fase adicionais, o que traz duas vantagens.
-Em primeiro lugar, o \textit{spatial sampling rate}\todo{Preciso de tradução disto e talvez incluir uma definição} pode ser aumentado por um fator de $M$ face ao agregado de fase, o que é útil para imagiamento com abertura sintética.\todo{Verificar esta tradução}
+Em primeiro lugar, o \textit{spatial sampling rate}\todo{Preciso de tradução disto e talvez incluir uma definição} pode ser aumentado por um fator de $M$ face ao agregado de fase, o que é útil para captação de imagens com abertura sintética.\todo{Verificar esta tradução}
 Em segundo, exitem benifícios ao nível da resolução angular quando se aumenta o tamanho do agregado virtual.
 
 \subsubsection{Formas de Onda Ortogonais}
@@ -222,7 +222,7 @@ A interpretação de que os sinais recebidos por um radar MIMO são a combinaç�
 \end{align}
 que depende explicitamente do ângulo $\theta$.
 
-Um radar MIMO aplica filtros adaptados, com a hipótese comum de todas as formas de onda serem ortogonais, o que implica que cada filtro vai selecionar um e um só sinal, descartando o resto.
+Um radar MIMO aplica filtros adaptados, com a hipótese comum de todas as formas de onda serem ortogonais, o que implica que cada filtro vai seleccionar um e um só sinal, descartando o resto.
 Cada recetor terá $M$ destes filtros, o que é visível na figura \ref{fig:proc} ainda para o caso $M=N=3$.
 
 \begin{figure}[ht]
@@ -259,6 +259,13 @@ A captação de imagens de grandes superfícies geográficas de alta resolução
 
 Desde cedo se relevou uma aplicação útil da tecnologia radar. Colocando radares a altitudes elevadas para o propósito, os sinais emitidos são refletidos pela superfície terrestre e são captados pelo radar com propriedades diferentes dependendo da superfície atingida, permitindo ao radar obter informação sobre a composição de determinadas zonas captadas no seu alcance.
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{sandiego}
+	\caption{Exemplo de imagem obtida por radar, através de SAR.}
+	\label{fig:sandiego}
+\end{figure}
+
 Em comparação a fotografia óptica, que para a escala considerada tem o seu alcance diminuído não só por obstáculos atmosféricos como nuvens, tempestades, ou outros fenómenos meteorológicos, como também pela composição da atmosfera em si, os sinais de rádio emitidos por radares são muito menos afetados por este tipo de interferências.
 
 Devido a estas vantagens, a criação de imagens de grandes superfícies e a sua aplicação em mapeamento terrestre, monitorização ambiental e sistemas de reconhecimento militar é frequentemente auxiliada por sistemas de radares próprios para o efeito.
@@ -292,7 +299,27 @@ O radar é contido num veículo que se encontra em voo a alta velocidade, a uma 
 
 Acrescentando-lhe informação do movimento, o radar consegue aumentar a definição do mapeamento ao longo da direcção indicada por \figlabel{E} na figura \ref{subfig:sar-side}. Dado a que utiliza vários pontos de vista diferentes para o mesmo alvo, e a elevada quantidade de imagens retiradas, o alcance individual de cada imagem pode ser mais reduzida para depois ser composta com as imagens restantes para formar uma imagem com maior alcance. A frequência de obtenção destas imagens, doravante referido por \textit{sampling rate}, necessita de ser grande o suficiente para adquirir dados de toda a superfície sem deixar falhas no mapeamento.
 
-Comparando uma colecção de sinais de SAR obtidos a uma matriz de antenas uniformemente espaçadas, podemos utilizar o valor de $B$ da figura \ref{subfig:sar-timesteps} como a distância entre as antenas da matriz. Assim, pelo critério de Nyquist, esta distância não pode ser superior a metade da frequência do sinal utilizado, ou seja, $B \leq \lambda/2$, para evitar ambiguidades nos sinais recebidos. Um SAR emprega um elemento direccional ao sinal recebido. \todo{Falta acabar esta aplicação, que roda à volta de MIMO monoestático (coerente)}
+Comparando uma colecção de sinais de SAR obtidos a uma matriz de antenas uniformemente espaçadas, podemos utilizar o valor de $B$ da figura \ref{subfig:sar-timesteps} como a distância entre as antenas da matriz. Assim, pelo critério de Nyquist, esta distância não pode ser superior a metade da frequência do sinal utilizado, ou seja, $B \leq \lambda/ 2$, para evitar ambiguidades nos sinais recebidos.
+
+O sistema transmite pulsos a uma frequência $f_p$ a uma velocidade de movimento $v$ constante. Assim, podemos determinar o intervalo de \textit{sampling} espacial, ou a distância viajada entre pulsos, como $\delta_x$.
+\begin{gather*}
+	\delta_x \triangleq \frac{v}{f_p}
+\end{gather*}
+O SAR tem de ter uma frequência elevada o suficiente para ter uma resolução da imagem aceitável, mas não grande demais para ter uma razão de área por \textit{sample} também considerável. Esta razão, referida por ACR (do inglês \textit{Area-Coverage Rate}, pode ser calculada para uma plataforma a movimentar-se a uma velocidade constante, utilizando a velocidade e a largura na direcção ortogonal \figlabel{D} na figura \ref{subfig:sar-side} de uma imagem, rotulada de $R_{textrm{swath}}$.
+\begin{gather*}
+	ACR \triangleq vR_{textrm{swath}}
+\end{gather*}
+O valor de $R_{textrm{swath}}$ está limitado pela velocidade de transmissão de pulsos $f_p$. Assim, o valor de $ACR$ também está limitado.
+\begin{gather*}
+	R_{textrm{swath}} < \frac{c/2}{f_p} \\
+	ACR < \delta_x\left(\frac{c}{2}\right)
+\end{gather*}
+
+A frequência $f_p$ é tanto melhor quanto menor for o seu valor, para maximizar o valor de $ACR$. No entanto, ainda é desejada uma resolução de imagem razoável, pelo que a frequência não pode ter um valor demasiado reduzido. Aumentando a abertura do radar resolve este problema ao adquirir mais dados por \textit{sample}, mas este método pode distorcer a qualidade das imagens devido a ângulos de incidência maiores.
+
+Outra solução passa pela implementação de mais recetores, que significa que múltiplos \textit{samples} são recebidos por cada pulso enviado. Comparando mais uma vez os sinais recebidos ao longo da trajetória de voo a um \textit{array} com distância $D$ entre os seus componentes, para $N$ recetores, a distância entre emissões passará a ser $N \cdot D$. Assim, a frequência de \textit{sampling} pode ser aumentada sem aumentar a frequência de emissão $f_p$.
+
+Este sistema pode ser conisderado \textit{Single-Input Multiple-Output}, mas pode ser extendido a MIMO ao utilizar vários emissores com formas de onda diferentes.
 
 \subsection{Radar Automóvel}
 
