@@ -30,7 +30,7 @@
 \newpage
 
 \begin{abstract}
-	Neste trabalho vamos tratar de radares multi-estáticos MIMO, acrónimo para \textit{Multiple-Input Multiple-Output}.
+  Neste trabalho vamos abordar radares MIMO, acrónimo para \textit{Multiple-Input Multiple-Output}. Aborda-se o conceito comparando com os radares convencionais equivalentes, e, por fim, explora-se um exemplo de aplicação em sistemas de imagiamento por radar MIMO.
 \end{abstract}
 
 \section{Introdução}
@@ -46,17 +46,33 @@ Uma nota sobre nomenclatura, ao longo deste trabalho usam-se símbolos miníscul
 Um sistema de radar ativo emite energia eletromagnética para analisar o ambiente.
 Um radar MIMO usa vários elementos emissores e transmite várias formas de onda não correlacionadas, de maneira que um recetor pode atribuir a cada sinal o seu emissor. 
 Pode portanto ser classificado como uma subdivisão de radar multiestático, em que as formas de onda utilizadas não são coerentes, tal que em cada pode ser feita a distinção da fonte dos sinais recebidos.
+No radar multiestático, os elementos emissores e recetores estão dispostos a distâncias consideráveis, como esquematizado na figura \ref{fig:multi}.
 
-Em termos práticos, os emissores podem estar substancialmente afastados, designando-se radar MIMO não coerente ou estatístico, por razões estudadas mais à frente.
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=5cm]{multistatic.png}
+  \caption{Radar multiestático.}
+  \label{fig:multi}
+\end{figure}
+
+Este tipo de radar MIMO é designado de não coerente ou estatístico, por razões estudadas mais à frente.
+
 Se, por outro lado, os emissores se encontrarem próximos uns dos outros, possivelmente na mesma plataforma ou agregado, então o sistema é designado de radar MIMO coerente.
+Este é a variante mais comum, e a estudada em mais detalhe neste trabalho.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=5cm]{concept.png}
+  \caption{Radar MIMO coerente.}
+  \label{fig:concept}
+\end{figure}
 
 \subsection{MIMO coerente e não coerente}
 
 No radar MIMO \textbf{coerente}, a colocação das antenas não difere do radar convencional, tal que as antenas de emissão e receção partilham o ângulo de observação a um alvo distante.
 Uma consequência é que a RCS (\textit{radar cross-section}) será praticamente constante.
-
-Este tipo pode ser visto como uma generalização do radar mono-estático.
-\todo{As fontes estão bué confusas aqui, mas isto é importante}
+Este tipo pode ser visto como uma generalização do radar mono-estático, e um esquema é visível na figura \ref{fig:concept}.
+\todo[disable]{As fontes estão bué confusas aqui, mas isto é importante}
 
 No radar MIMO \textbf{não coerente}, os transmissores e receptores são necessariamente antenas separadas, colocadas em diferentes posições numa certa área, tal que os ângulos de observação ao alvo são diferentes para cada elemento.
 
@@ -77,13 +93,12 @@ De facto, agregados de fase \todo{É esta a tradução de phased arrays?} são u
 A diferença é que neste caso os sinais de saída só diferem na fase entre si de maneira a guiar um lobo de ganho elevado. 
 Estes sinais são então correlacionados e não oferecem mais nenhum grau de liberdade.
 
-\todo{Mais a ser escrito aqui}
+\todo[disable]{Mais a ser escrito aqui}
 
-O primeiro protocolo de radar MIMO foi desenvolvido nos anos 90, tem o nome de \textit{Synthetic pulse and Antenna Radar}, usa um agregado que alimenta cada elemento de antena com um sinal específico, tal que o recetor é irradiado com vários lobos. 
+O radar MIMO trata-se de uma tecnologia emergente, com centenas de artigos publicados nos últimos 15 anos, e com o primeiro sistema a aplicar este conceito desenvolvido nos anos 90.
+Contudo, é tomado com algum ceticismo, já que o seu uso em certas aplicações degrada substancialmente o desempenho de sistemas convencionais.
+As aplicações onde o radar MIMO supera os sistemas convencionais são \textit{airborne surface surveillance} e \textit{over-the-horizon radars}.
 
-
-
-\section{Pesquisa em radar MIMO}
 
 \section{Radar MIMO}
 
