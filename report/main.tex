@@ -102,7 +102,6 @@ O radar MIMO trata-se de uma tecnologia emergente, com centenas de artigos publi
 Contudo, é tomado com algum ceticismo, já que o seu uso em certas aplicações degrada substancialmente o desempenho de sistemas convencionais.
 As aplicações onde o radar MIMO supera os sistemas convencionais são \textit{airborne surface surveillance} e \textit{over-the-horizon radars}.
 
-
 \section{Radar MIMO}
 
 \subsection{Princípos de comunicações MIMO e radar}
@@ -311,6 +310,37 @@ O radar automóvel da figura \ref{fig:autorad} representa uma aplicação de rad
 Embora utilizar sistemas como \textit{phased arrays} possa ser uma solução, a aplicação com sistemas de tamanho mais reduzido como o utilizado aqui favorece os radares MIMO pelo custo. Vários emissores alinhados entre si cobrem cada um uma abertura reduzida, e todas as aberturas se sobrepõem para cobrir uma área de interesse. Um recetor centrado recebe todos os sinais e filtra-os separadamente para identificar o espaço à sua frente.
 
 Em comparação a um \textit{phased array}, um radar MIMO consegue obter um resulado similar sem recorrer a mudanças de fase ou canais de frequência separados. No entanto, resulta num SNR menor.
+
+\subsection{Radar Além-Horizonte}
+
+Uma técnica de radar conhecida por radar além-horizonte, ou \textit{Over-The-Horizon}, doravante referido por OTH, utiliza as diferentes altitudes das várias camadas da ionosfera terrestre para obter respostas de distâncias muito superiores ao alcance direto do radar, podendo assim ultrapassar a curvatura da terra, aumentando bastante o alcance do radar.
+
+No entanto, o uso extensivo da atmosfera como modo de propagação implica o acréscimo de ruído e \textit{clutter}, e perdas de sinal muito maiores devido às reflexões adicionais para obter um sinal. Estes problemas dificultam bastante a detecção e reduzem imenso a resolução da resposta.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}[]
+		\path [pattern = crosshatch dots, pattern color = white!80!black,draw=white!70!black] (1,0) -- ++(1,0) arc (0:33.69:1) -- cycle;
+		\node at (2.2,0.3) [] {$\phi$};
+		\path [draw=white!40!black,thick] (0,0) -- (8,0);
+		\path [draw=white!60!black,thick] (0,2) -- (8,2);
+		\path [draw=white!80!black,thick] (0,4) -- (8,4);
+		\node (radar) at (1,0) [circle,fill,inner sep = 1pt,label={135:Radar}] {};
+		\path [draw,-{Latex[round]},dashed] (radar) -> (4,2);
+		\path [draw,-{Latex[round]},dashed] (4,2) -> (7,0);
+		\path [draw,-{Latex[round]},dashed] (radar) -> (4,4);
+		\path [draw,-{Latex[round]},dashed] (4,4) -> (7,0);
+		\node (target) at (7,0) [circle,fill,inner sep = 1pt,label={45:Alvo}] {};
+	\end{tikzpicture}
+	\caption{Exemplificação das reflexões atmosféricas e múltiplos trajetos para o alvo com radar OTH.}
+	\label{fig:oth}
+\end{figure}
+
+Não só existem estes problemas como também pode ocorrer interferência do mesmo sinal através de trajetos diferentes para o mesmo alvo, como exemplificado na figura \ref{fig:oth}. Isto resulta no mesmo sinal a ser recebido com ângulos de envio e receção diferentes.
+
+Quando o \textit{clutter} viaja com ângulos de incidência e receção diferentes do sinal de ilumniação, é possível colocar um anulador de transmissão no ângulo do \textit{clutter} para melhorar a deteção do alvo. No entanto, os ângulos envolvidos neste cálculo não são conhecidos antes da transmissão, pelo que colocar o anulador nem sempre garante melhoria.
+
+Utilizando um radar MIMO o anulador de transmissão pode ser ajustado de acordo com a distância ao alvo, pelo que a deteção é melhorada a todas as distâncias dentro do alcance do radar.
 
 \nocite{radarhandbook,radarsystems,davis2015mimo,li2018mimo,radartutorial,sturm2013spectrally,chen2008mimo,nrcan,mimoradarbook}
 \printbibliography
