@@ -1,6 +1,7 @@
 % arara: xelatex: { synctex: yes, shell: yes }
-% arara: biber
-% arara: xelatex: { synctex: yes, shell: yes }
+% arara: biber if (missing("bbl") || changed("bib"))
+% arara: xelatex if (missing("bbl") || changed("bbl"))
+% arara: xelatex if (found("log", "Label(s) may have changed."))
 
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass[purist,portuguese]{ist-report}
@@ -10,6 +11,8 @@
 
 \usepackage{newtxsf}
 %\usepackage[math]{iwona}
+
+\newrobustcmd*{\figlabel}[1]{\textbf{(#1)}}
 
 \author{Daniel de Schiffart \\ \texttt{81479} \and João Gonçalves \\ \texttt{81040}}
 \title{Radar MIMO}
@@ -263,7 +266,34 @@ Devido a estas vantagens, a criação de imagens de grandes superfícies e a sua
 
 \subsubsection{Radar de Abertura Sintética}
 
-O \textsc{Radar de Abertura Sintética}, doravante referido pela sigla inglesa SAR, é um sistema de radar aéreo ou espacial que beneficia do seu movimento para obter vários sinais diferentes ao longo da sua trajetória, juntando-os para criar um resultado final. \todo{Falta relacionar tudo com o MIMO}
+O \textsc{Radar de Abertura Sintética}, doravante referido pela sigla inglesa SAR, é um sistema de radar aéreo ou espacial que beneficia do seu movimento para obter vários sinais diferentes ao longo da sua trajetória, juntando-os para criar um resultado final, utilizando os sinais obtidos como referências espaciais diferentes, como se pode verificar na figura \ref{subfig:sar-timesteps}.
+
+\begin{figure}[ht]
+	\centering
+	\hspace*{\fill}
+	\begin{minipage}[t]{0.43\textwidth}
+		\centering
+		\includegraphics[height=4cm]{radgeom}
+		\subcaption{Esquema geral do uso de SAR. Na imagem os rótulos representam \figlabel{A} a trajetória de voo, \figlabel{B} o \textit{nadir}, \figlabel{C} a faixa iluminada a cada instante, \figlabel{D} o alcance a cada instante e \figlabel{E} a zona iluminada prevista na trajetória.}
+		\label{subfig:sar-side}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.43\textwidth}
+		\centering
+		\includegraphics[height=4cm]{sar}
+		\subcaption{Captação de imagens em movimento são utilizadas como perspetivas diferentes. Quando um alvo \textbf{A} entra no alcance do radar, inicia-se o cálculo da distância entre antenas simuladas \textbf{B}, que é o segmento máximo da trajetória em que \textbf{A} se encontra em alcance.}
+		\label{subfig:sar-timesteps}
+	\end{minipage}
+	\hspace*{\fill}
+	\caption{Ilustrações sobre o SAR, cortesia da \textit{Natural Resources Canada} \cite{nrcan}.}
+	\label{fig:nrcan}
+\end{figure}
+
+O radar é contido num veículo que se encontra em voo a alta velocidade, a uma altitude moderada que depende da escala da área a ser mapeada. O radar emite pulsos ao longo do deslocamento e recebe ecos suficientes para construir uma imagem do ambiente à sua volta a cada instante.
+
+Acrescentando-lhe informação do movimento, o radar consegue aumentar a definição do mapeamento ao longo da direcção indicada por \figlabel{E} na figura \ref{subfig:sar-side}. Dado a que utiliza vários pontos de vista diferentes para o mesmo alvo, e a elevada quantidade de imagens retiradas, o alcance individual de cada imagem pode ser mais reduzida para depois ser composta com as imagens restantes para formar uma imagem com maior alcance. A frequência de obtenção destas imagens, doravante referido por \textit{sampling rate}, necessita de ser grande o suficiente para adquirir dados de toda a superfície sem deixar falhas no mapeamento.
+
+Comparando uma colecção de sinais de SAR obtidos a uma matriz de antenas uniformemente espaçadas, podemos utilizar o valor de $B$ da figura \ref{subfig:sar-timesteps} como a distância entre as antenas da matriz. Assim, pelo critério de Nyquist, esta distância não pode ser superior a metade da frequência do sinal utilizado, ou seja, $B \leq \lambda/2$, para evitar ambiguidades nos sinais recebidos. Um SAR emprega um elemento direccional ao sinal recebido. \todo{Falta acabar esta aplicação, que roda à volta de MIMO monoestático (coerente)}
 
 \printbibliography
 \listoftodos
