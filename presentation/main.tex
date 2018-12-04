@@ -1,4 +1,7 @@
 % arara: pdflatex
+% arara: biber if (missing("bbl") || changed("bib"))
+% arara: pdflatex if (missing("bbl") || changed("bbl"))
+% arara: pdflatex if (found("log", "Label(s) may have changed."))
 \documentclass[portuguese]{beamer}
 \input{preamble-beamer}
 
@@ -42,6 +45,20 @@
 \begin{frame}{Conteúdo}
   \tableofcontents
 \end{frame}
+
+\section{Introdução}
+
+\begin{frame}{Introdução}
+  
+\end{frame}
+
+\section{Perspetiva Histórica}
+
+\section{Conceitos}
+
+\section{Processamento de Sinais}
+
+\section{Aplicações}
 
 \begin{frame}{Referências}
   \printbibliography

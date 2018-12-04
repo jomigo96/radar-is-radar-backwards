@@ -21,6 +21,9 @@
 \subject{Sistemas de Radar}
 \date{Dezembro de 2018}
 
+
+\newcommand{\ops}{\textrm{OPS}}
+
 \begin{document}
 
 \makecover
@@ -54,7 +57,7 @@ No radar multiestático, os elementos emissores e recetores estão dispostos a d
 \begin{figure}[h]
   \centering
   \includegraphics[height=5cm]{multistatic.png}
-  \caption{Radar multiestático.}
+  \caption{Radar multiestático. Obtido de \cite{mimoradarbook}.}
   \label{fig:multi}
 \end{figure}
 
@@ -66,7 +69,7 @@ Este é a variante mais comum, e a estudada em mais detalhe neste trabalho.
 \begin{figure}[h]
   \centering
   \includegraphics[height=5cm]{concept.png}
-  \caption{Radar MIMO coerente.}
+  \caption{Radar MIMO coerente. Obtido de \cite{mimoradarbook}.}
   \label{fig:concept}
 \end{figure}
 
@@ -161,7 +164,7 @@ Se o objetivo for obter um agregado virtual contínuo, tal é possível separand
 \begin{figure}[h]
   \centering
   \includegraphics[height=7cm]{virt1.png}
-  \caption{Agregados virtuais equivalentes.}
+  \caption{Agregados virtuais equivalentes. Obtido de \cite{davis2015mimo}.}
   \label{fig:virt1}
 \end{figure}
 
@@ -198,7 +201,7 @@ Este caso está esquematizado na figura \ref{fig:rad3}.
 \begin{figure}[hp]
   \centering
   \includegraphics[width=0.8\linewidth]{rad3.png}
-  \caption{Modelo de um radar MIMO com $N=M=3$}
+  \caption{Modelo de um radar MIMO com $N=M=3$. Obtido de \cite{davis2015mimo}.}
   \label{fig:rad3}
 \end{figure}
 
@@ -229,7 +232,7 @@ Cada recetor terá $M$ destes filtros, o que é visível na figura \ref{fig:proc
 \begin{figure}[ht]
   \centering
   \includegraphics[height=7cm]{processor.png}
-  \caption{Processamento de sinais em radar MIMO.}
+  \caption{Processamento de sinais em radar MIMO. Obtido de \cite{davis2015mimo}.}
   \label{fig:proc}
 \end{figure}
 
@@ -243,7 +246,7 @@ O resultado desta filtragem é a matriz $N\times M$:
 \end{align}
 com $\mathbf{R}_x$ a matriz de correlação dos sinais de entrada e $\mathbf{E}$ o ruído no filtro.
 
-Pode ser mostrado que o $SNR$ obtido com este processamento é inferior ao do radar convencional por um fator de $\frac{1}{M^2}$, o que deve ser compensado com processamento coerente.
+Pode ser mostrado que o $SNR$ obtido com este processamento é inferior ao do radar convencional por um fator de $\frac{1}{M^2}$, (ver figura \ref{fig:tabela} de \cite{mimoradarbook}), o que deve ser compensado com processamento coerente.
 Com este, usando um \textit{threshold} $\gamma$, a saída do filtro terá uma distribuição gaussiana com média nula, e a deteção um distribuição exponencial, de onde seguem as probabilidades de deteção e falso alarme:
 \begin{align}
   p_d &= exp\left( -\frac{\gamma}{\sigma_t^2 + \sigma_n^2} \right) \label{eq:pd} \\
@@ -251,6 +254,12 @@ Com este, usando um \textit{threshold} $\gamma$, a saída do filtro terá uma di
 \end{align}
 onde $\sigma_t^2$ e $\sigma_n^2$ são as potências do alvo e interferência (\textit{clutter} mais ruído), respetivamente.
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{table.png}
+  \caption{Comparação da sensibilidade do radar MIMO e convencional. Obtido de \cite{mimoradarbook}.}
+  \label{fig:tabela}
+\end{figure}
 
 \section{Exemplos de Aplicações}
 
@@ -312,9 +321,59 @@ Embora utilizar sistemas como \textit{phased arrays} possa ser uma solução, a 
 
 Em comparação a um \textit{phased array}, um radar MIMO consegue obter um resulado similar sem recorrer a mudanças de fase ou canais de frequência separados. No entanto, resulta num SNR menor.
 
+
+\section{Dificuldades de Implementação}
+
+A implementação de radar MIMO coerente traz alguns desafios, que podem ou não ditar a impossibilidade de usar este sistema. 
+Os mais estudados são o aumento da complexidade de computação (em processamento digital), a rejeição adaptativa do \textit{clutter}, e outros problemas de calibração e \textit{hardware}.
+Nesta secção discute-se conceptualmente os primeiros dois, e mencionam-se estratégias de mitigação.
+
+\subsection{Complexidade de Computação}
+
+As tarefas de processamento principais em radar são:
+\begin{itemize}
+  \item Compressão de pulsos
+  \item Processamento de Doppler
+  \item Rejeição de \textit{clutter}.
+\end{itemize}
+
+Para o efeito de analizar a complexidade computacional, os primeiros dois passos são considerados parte de pré-processamento.
+A equação \ref{eq:ops_pre} revela a fração de FLOPS\footnote{\textit{floating point operations per second}} quando se usa um radar MIMO com $M$ formas de onda, $N$ recetores e $L$ \textit{bins} no alcance.
+\begin{align}
+  f_{pre}=1+\frac{\log_2 N}{\log_2 (LM)}.
+  \label{eq:ops_pre}
+\end{align}
+Para chegar a esta expressão, modela-se que a compressão de pulsos é feita com convolução com FFT, e o processamento de doppler também com FFT.
+Este fator é pequeno, por exemplo para $N=4$, $M=128$ e $L=1000$, observa-se um aumento de apenas \SI{12}{\percent}. 
+
+Já para a parte da rejeição do \textit{clutter}, a fracção é:
+\begin{align}
+  f_{STAP} = M\left( \frac{MN^3+L}{M^2N^2+L} \right),
+  \label{eq:ops_cl}
+\end{align}
+e tipicamente, $L$ é muitas vezes superior a $M$ ou $N$, logo o aumento é proporcional ao número de formas de onda.
+Isto mostra que no mínimo temos o dobro da carga computacional ao usar MIMO, o que para algumas aplicações é proibitivo. 
+
+\subsection{Rejeição Adaptativa do \textit{clutter}}
+
+Para além do aumento da computação necessária para a rejeição do \textit{clutter}, o aumentado número de graus de liberdade também complica o próprio porcesso no caso de \textit{clutter} heterogéneo. 
+Normalmente, a eliminação do \textit{clutter} é feita usando \textit{training data} na dimensão do alcance, e geralmente devem usar-se um número de amostras na ordem dos graus de liberdade, o que se torna ainda mais difícil com o aumento de formas de onda distintas.
+
+As soluções com melhor potencial involvem usar conhecimento \emph{a priori} do ambiente de \textit{clutter} para remover qualquer tendência antes do processamento adaptativo, são chamadas de \textit{knowledge-aided space-time adaptative processing}, KA-STAP.
+
+\section{Conclusões}
+
+O radar MIMO coerente é a extensão natural do agregado de fase, e uma área onde muita investigação está a ser feita, com o objetivo de melhorar a mesma.
+No entanto, não é a solução mágica que irá beneficiar todos os sistemas nas suas diversas aplicações. De facto, o desempenho de muitos sistemas é piorado ao usar MIMO, especialmente quando este é limitado pelo ruído de temperatura.
+Quando o desempenho é limitado por outros fatores, como o ruído multiplicativo em SAR, \textit{clutter} em GMTI\footnote{Ground Moving Target Indication}, fenómenos na ionosfera, ou problemas de sincronização associada à fusão de dados em radar multiestático, então o radar MIMO pode trazer melhorias.
+
+
+
+
+
+
 \nocite{radarhandbook,radarsystems,davis2015mimo,li2018mimo,radartutorial,sturm2013spectrally,chen2008mimo,nrcan,mimoradarbook}
 \printbibliography
 
 \listoftodos
-
 \end{document}
