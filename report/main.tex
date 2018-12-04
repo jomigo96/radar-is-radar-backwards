@@ -38,7 +38,7 @@
 
 \section{Introdução}
 
-Este trabalho é baseado em \cite{davis2015mimo} e \cite{li2018mimo}.\todo{Obviamente que não dizemos isto assim, mas o texto vem 100\% dali, não podemos citar a cada parágrafo.}
+%Este trabalho é baseado em \cite{davis2015mimo} e \cite{li2018mimo}.\todo{Obviamente que não dizemos isto assim, mas o texto vem 100\% dali, não podemos citar a cada parágrafo.}
 
 Neste trabalho, é apresentada uma visão global sobre o radar MIMO, detalhando as suas principais características, história, desenvolvimentos em curso e aplicações.
 
@@ -295,6 +295,26 @@ Acrescentando-lhe informação do movimento, o radar consegue aumentar a defini�
 
 Comparando uma colecção de sinais de SAR obtidos a uma matriz de antenas uniformemente espaçadas, podemos utilizar o valor de $B$ da figura \ref{subfig:sar-timesteps} como a distância entre as antenas da matriz. Assim, pelo critério de Nyquist, esta distância não pode ser superior a metade da frequência do sinal utilizado, ou seja, $B \leq \lambda/2$, para evitar ambiguidades nos sinais recebidos. Um SAR emprega um elemento direccional ao sinal recebido. \todo{Falta acabar esta aplicação, que roda à volta de MIMO monoestático (coerente)}
 
+\subsection{Radar Automóvel}
+
+Radares automóveis estão a entrar rapidamente no mercado, tanto no aumento de segurança e conveniência do condutor como na aplicação a automóveis autónomos. Face a outros métodos semelhantes como câmeras, \textit{lidar} e \textit{sonar}, as vantagens são semelhantes a outras já referidas, como viabilidade em condições meteorológicas adversas. No entanto, radares MIMO estão a ganhar terreno sobre outros radares devido ao seu custo mais reduzido.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{auto}
+	\caption{Radar automóvel dianteiro \textit{standard} (à esquerda), onde PDV significa ponto de vista, e utilizando MIMO (à direita). Obtido de \textit{\citeauthor{mimoradarbook}} \cite{mimoradarbook}.}
+	\label{fig:autorad}
+\end{figure}
+
+O radar automóvel da figura \ref{fig:autorad} representa uma aplicação de radar. A detecção de distâncias a obstáculos dentro do ponto de vista do radar e a sua velocidade revela ser relativamente simples mesmo com radares SISO. No entanto, obter o ângulo de obstáculos pode ser uma dificuldade com este tipo de radar.
+
+Embora utilizar sistemas como \textit{phased arrays} possa ser uma solução, a aplicação com sistemas de tamanho mais reduzido como o utilizado aqui favorece os radares MIMO pelo custo. Vários emissores alinhados entre si cobrem cada um uma abertura reduzida, e todas as aberturas se sobrepõem para cobrir uma área de interesse. Um recetor centrado recebe todos os sinais e filtra-os separadamente para identificar o espaço à sua frente.
+
+Em comparação a um \textit{phased array}, um radar MIMO consegue obter um resulado similar sem recorrer a mudanças de fase ou canais de frequência separados. No entanto, resulta num SNR menor.
+
+\nocite{radarhandbook,radarsystems,davis2015mimo,li2018mimo,radartutorial,sturm2013spectrally,chen2008mimo,nrcan,mimoradarbook}
 \printbibliography
+
 \listoftodos
+
 \end{document}
