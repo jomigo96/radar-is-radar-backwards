@@ -1,0 +1,51 @@
+% arara: pdflatex
+\documentclass[portuguese]{beamer}
+\input{preamble-beamer}
+
+
+\title[Radar MIMO]{Radar MIMO}
+
+
+\author[MEAer -- Sistemas de Radar]{
+  João Gonçalves \texttt{81040} \and Daniel de Schiffart \texttt{81479} 
+    }
+
+\institute{Sistemas de Radar}
+\date{Dezembro de 2018}
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}Trabalho de síntese\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{frame}
+    \begin{figure}
+	\includegraphics[width=0.5\linewidth]{graphics/tecnico_logo.png}
+    \end{figure}
+    \titlepage
+\end{frame}
+\setbeamertemplate{section in toc}[circle]
+\begin{frame}{Conteúdo}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}{Referências}
+  \printbibliography
+\end{frame}
+
+\end{document}
+
