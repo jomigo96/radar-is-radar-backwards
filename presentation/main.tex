@@ -10,7 +10,7 @@
 
 
 \author[MEAer -- Sistemas de Radar]{
-  João Gonçalves \texttt{81040} \and Daniel de Schiffart \texttt{81479} 
+  João Gonçalves 81040 \and Daniel de Schiffart 81479
     }
 
 \institute{Sistemas de Radar}
@@ -154,6 +154,81 @@
 \end{frame}
 
 \section{Aplicações}
+
+\begin{frame}{Imagens de Radar}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width = 0.7\textwidth]{../report/graphics/sandiego.jpg}
+%		\caption{Exemplo de imagem obtida por radar, através de SAR.}
+		\label{fig:sandiego}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Radar de Abertura Sintética - SAR}
+	\begin{figure}
+		\centering
+		\begin{minipage}[t]{0.43\textwidth}
+			\centering
+			\includegraphics[height=3.3cm]{../report/graphics/radgeom.png}
+%			\subcaption{Esquema geral do uso de SAR. Na imagem os rótulos representam \figlabel{A} a trajetória de voo, \figlabel{B} o \textit{nadir}, \figlabel{C} a faixa iluminada a cada instante, \figlabel{D} o alcance a cada instante e \figlabel{E} a zona iluminada prevista na trajetória.}
+			\label{subfig:sar-side}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.43\textwidth}
+			\centering
+			\includegraphics[height=3.3cm]{../report/graphics/sar.png}
+%			\subcaption{Captação de imagens em movimento são utilizadas como perspetivas diferentes. Quando um alvo \textbf{A} entra no alcance do radar, inicia-se o cálculo da distância entre antenas simuladas \textbf{B}, que é o segmento máximo da trajetória em que \textbf{A} se encontra em alcance.}
+			\label{subfig:sar-timesteps}
+		\end{minipage}
+		\caption{Radar de Abertura Sintética.}
+		\label{fig:nrcan}
+	\end{figure}
+	\begin{align*}
+		\delta_x &\triangleq \frac{v}{f_p}
+		& ACR &\triangleq vR_{\textrm{swath}} \\
+		R_{\textrm{swath}} &< \frac{c/2}{f_p}
+		& ACR &< \delta_x\left(\frac{c}{2}\right)
+	\end{align*}
+\end{frame}
+
+\begin{frame}{Radar Automóvel}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\textwidth]{../report/graphics/auto.png}
+		\caption{Radar automóvel dianteiro.}
+		\label{fig:autorad}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Radar Além-Horizonte}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\textwidth]{oth-b.jpg}
+		\caption{Radar Além-Horizonte, ou OTH (\textit{Over The Horizon}).}
+		\label{fig:oth-b}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Radar Além-Horizonte}
+	\begin{figure}[ht]
+		\centering
+		\begin{tikzpicture}[]
+			\path [pattern = crosshatch dots, pattern color = white!80!black,draw=white!70!black] (1,0) -- ++(1,0) arc (0:33.69:1) -- cycle;
+			\node at (2.2,0.3) [] {$\phi$};
+			\path [draw=white!40!black,thick] (0,0) -- (8,0);
+			\path [draw=white!60!black,thick] (0,2) -- (8,2);
+			\path [draw=white!80!black,thick] (0,4) -- (8,4);
+			\node (radar) at (1,0) [circle,fill,inner sep = 1pt,label={135:Radar}] {};
+			\path [draw,-{Latex[round]},dashed] (radar) -> (4,2);
+			\path [draw,-{Latex[round]},dashed] (4,2) -> (7,0);
+			\path [draw,-{Latex[round]},dashed] (radar) -> (4,4);
+			\path [draw,-{Latex[round]},dashed] (4,4) -> (7,0);
+			\node (target) at (7,0) [circle,fill,inner sep = 1pt,label={45:Alvo}] {};
+		\end{tikzpicture}
+		\caption{Exemplificação das reflexões atmosféricas e múltiplos trajetos para o alvo com radar OTH.}
+		\label{fig:oth}
+	\end{figure}
+\end{frame}
 
 \section{Dificuldades}
 
