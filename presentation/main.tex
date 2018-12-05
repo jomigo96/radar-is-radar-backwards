@@ -64,6 +64,11 @@
 	\caption{Sistema SISO e MIMO. Fonte: \cite{swantennas}.}
 	\label{fig:antenas}
   \end{figure}
+  Vantagens
+  \begin{itemize}
+	\item Explora a diversidade espacial.
+	\item \textit{Streams} de informação redundante.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Radar MIMO}
@@ -94,13 +99,110 @@
   \end{figure}
 \end{frame}
 
+\begin{frame}{Agregado virtual}
+  Com formas de onda ortogonais, pode-se analizar um radar MIMO coerente como um agregado virtual.
+  \begin{align*}
+    \left\{ \frac{x_{Tm}+x_{Rn}}{2}:\; m=1,\ldots,M;\,n=1,\ldots,N \right\}
+  \end{align*}
+\end{frame}
 
+\begin{frame}{Agregado virtual}
+  \begin{figure}[]
+	\centering
+	\includegraphics[height=5.5cm]{../report/graphics/virt1.png}
+	\caption{Agregado virtual MIMO. Fonte: \cite{davis2015mimo}.}
+	\label{fig:virt1}
+  \end{figure}
+\end{frame}
 
 \section{Processamento de Sinais}
 
+\begin{frame}{Processamento de Sinais}
+  \begin{figure}[]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../report/graphics/rad3.png}
+	\caption{MIMO com $M=N=3$. Fonte: \cite{davis2015mimo}.}
+	\label{fig:r3}
+  \end{figure}
+  \begin{align*}
+    \mathbf{y}(t,\theta_0) = \alpha\mathbf{b}(\theta_0)\mathbf{a}(\theta_0)^T\mathbf{x}(t)+\mathbf{v}(t)
+  \end{align*}
+\end{frame}
+
+\begin{frame}{Processamento de Sinais}
+  \begin{figure}[]
+	\centering
+	\includegraphics[height=6.5cm]{../report/graphics/processor.png}
+	\caption{Separação dos sinais observados. Fonte: \cite{davis2015mimo}.}
+	\label{fig:proc}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Processamento de Sinais}
+  \par
+  \small
+  \begin{align*}
+    p_d &= exp\left( -\frac{\gamma}{\sigma_t^2 + \sigma_n^2} \right)  \\
+    p_{fa} &= exp\left( -\frac{\gamma}{\sigma_n^2} \right) 
+  \end{align*}
+  \begin{figure}[]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../report/graphics/table.png}
+	\caption{Sensibilidade de MIMO coerente. Fonte: \ref{mimoradarbook}.}
+	\label{fig:tabela}
+  \end{figure}
+\end{frame}
+
 \section{Aplicações}
 
-\section{Perspetiva Histórica}
+\section{Dificuldades}
+
+\begin{frame}{Dificuldades}
+  A implementação do radar MIMO traz alguns problemas práticos
+  \vspace{10pt}
+  \begin{itemize}
+    \item Complexidade de computação
+	\item Rejeição adaptativa de clutter
+	\item Problemas de calibração e equalização
+	\item Constrangimentos de Hardware
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Computação}
+  Em processamento digital, as tarefas mais complexas são:
+  \begin{itemize}
+	\item Compressão de pulsos
+	\item Processamento Doppler
+	\item Rejeição de clutter
+  \end{itemize}
+  Fração de FLOPS:
+  \begin{align*}
+	f_{pre} &= 1+ \frac{\log_2 N}{\log_2 (LM)}\, &&\longrightarrow \textrm{convolução com FFTs}
+ \\
+	f_c &= M\left( \frac{MN^3+L}{M^2N^2+L} \right) \, &&\longrightarrow \textrm{Algoritmos STAP}
+  \end{align*}
+\end{frame}
+
+\section{Conclusão}
+
+\begin{frame}{Conclusões}
+  Radar MIMO pode melhorar os sistemas convencionais nos ramos de
+  \begin{itemize}
+	\item Imagens por Radar
+	\item Radar \textit{Over-the-Horizon} 
+	\item \textit{Airborne surface surveillance}
+  \end{itemize}
+  Em muitos outros sistemas não oferece melhorias.
+
+  \vspace{20pt}
+
+  Tecnologia recente e em desenvolvimento.
+  \begin{itemize}
+	\item Primeira aparência nos anos 90
+	\item Abundância de artigos sobre radar MIMO nos últimos 15 anos
+  \end{itemize}
+
+\end{frame}
 
 \begin{frame}{Referências}
   \printbibliography
