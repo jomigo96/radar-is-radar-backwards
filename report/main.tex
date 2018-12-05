@@ -36,14 +36,23 @@
 \newpage
 
 \begin{abstract}
-  Neste trabalho vamos abordar radares MIMO, acrónimo para \textit{Multiple-Input Multiple-Output}. Aborda-se o conceito comparando com os radares convencionais equivalentes, e, por fim, explora-se um exemplo de aplicação em sistemas de imagiamento por radar MIMO.
+  Neste trabalho vamos abordar radares MIMO, acrónimo para \textit{Multiple-Input Multiple-Output}. Aborda-se o conceito comparando com os radares convencionais equivalentes, e, por fim, exploram-se exemplos de aplicação em sistemas de radar.
 \end{abstract}
 
 \section{Introdução}
 
 %Este trabalho é baseado em \cite{davis2015mimo} e \cite{li2018mimo}.\todo{Obviamente que não dizemos isto assim, mas o texto vem 100\% dali, não podemos citar a cada parágrafo.}
 
-Neste trabalho, é apresentada uma visão global sobre o radar MIMO, detalhando as suas principais características, história, desenvolvimentos em curso e aplicações.
+%Neste trabalho, é apresentada uma visão global sobre o radar MIMO, detalhando as suas principais características, história, desenvolvimentos em curso e aplicações.
+
+O radar MIMO é uma variante de radar relativamente recente que procura melhorar o desempenho de outros sistemas existentes.
+Ao longo deste trabalho de síntese procura-se definir o conceito de radar MIMO em comparação com radares monoestáticos e multiestáticos, usando também as noções MIMO do ramo das telecomunicações.
+
+Exibe-se os princípios básicos do sistema, e expõe-se o conceito de agregado virtual, e de seguida apresentam-se algumas diferenças no processamento de sinais deste sistema.
+
+Nas secções seguintes, exploram-se aplicações do radar MIMO, nos sistemas de imagens por radar e de abertura sintética, no radar \textit{over-the-horizon} e no radar automóvel.
+
+Por fim, expõem-se algumas dificuldades da implementação do radar MIMO e possíveis melhorias.
 
 Uma nota sobre nomenclatura, ao longo deste trabalho usam-se símbolos minúsculos a negrito para designar vetores, como $\mathbf{x}(t)$, maiúsculos a negrito para designar matrizes, como $\mathbf{H}(t)$, e os símbolos a fonte normal são, a não ser que referido o contrário, unidimensionais.
 
@@ -107,11 +116,11 @@ As aplicações onde o radar MIMO supera os sistemas convencionais são \textit{
 
 \section{Radar MIMO}
 
-\subsection{Princípos de comunicações MIMO e radar}
+\subsection{Princípios de comunicações MIMO e radar}
 
 A meta de qualquer sistema de radar é inferir uma propriedade do ambiente a partir das características das ondas eletromagnéticas transmitidas.
 Os sistemas de radar são normalmente modelados linearmente, com a entrada sendo o sinal irradiado, e a saída o sinal recebido. 
-Para o caso SISO, denomeia-se $x(t)$ a representação complexa do sinal de entrada transportado na frequência $\omega_c$, $(t)$ a saída, $h(t)$ a resposta impulsiva e $v(t)$ o ruído no recetor.
+Para o caso SISO, denomina-se $x(t)$ a representação complexa do sinal de entrada transportado na frequência $\omega_c$, $(t)$ a saída, $h(t)$ a resposta impulsiva e $v(t)$ o ruído no recetor.
 A resposta pode ser dada por:
 \begin{align}
   y(t) = \int_0^\infty h(\tau)e^{-i\omega_c\tau}(t-\tau)d\tau + v(t).
@@ -169,7 +178,7 @@ Se o objetivo for obter um agregado virtual contínuo, tal é possível separand
 
 Como observado, transmitir formas de onda ortogonais origina centros de fase adicionais, o que traz duas vantagens.
 Em primeiro lugar, o \textit{spatial sampling rate}\todo{Preciso de tradução disto e talvez incluir uma definição} pode ser aumentado por um fator de $M$ face ao agregado de fase, o que é útil para captação de imagens com abertura sintética.\todo{Verificar esta tradução}
-Em segundo, exitem benifícios ao nível da resolução angular quando se aumenta o tamanho do agregado virtual.
+Em segundo, exitem benefícios ao nível da resolução angular quando se aumenta o tamanho do agregado virtual.
 
 \subsubsection{Formas de Onda Ortogonais}
 
@@ -328,7 +337,7 @@ A frequência $f_p$ é tanto melhor quanto menor for o seu valor, para maximizar
 
 Outra solução passa pela implementação de mais recetores, que significa que múltiplos \textit{samples} são recebidos por cada pulso enviado. Comparando mais uma vez os sinais recebidos ao longo da trajetória de voo a um \textit{array} com distância $D$ entre os seus componentes, para $N$ recetores, a distância entre emissões passará a ser $N \cdot D$. Assim, a frequência de \textit{sampling} pode ser aumentada sem aumentar a frequência de emissão $f_p$.
 
-Este sistema pode ser conisderado \textit{Single-Input Multiple-Output}, mas pode ser extendido a MIMO ao utilizar vários emissores com formas de onda diferentes.
+Este sistema pode ser considerado \textit{Single-Input Multiple-Output}, mas pode ser entendido a MIMO ao utilizar vários emissores com formas de onda diferentes.
 
 \subsection{Radar Automóvel}
 
@@ -345,7 +354,7 @@ O radar automóvel da figura \ref{fig:autorad} representa uma aplicação de rad
 
 Embora utilizar sistemas como \textit{phased arrays} possa ser uma solução, a aplicação com sistemas de tamanho mais reduzido como o utilizado aqui favorece os radares MIMO pelo custo. Vários emissores alinhados entre si cobrem cada um uma abertura reduzida, e todas as aberturas se sobrepõem para cobrir uma área de interesse. Um recetor centrado recebe todos os sinais e filtra-os separadamente para identificar o espaço à sua frente.
 
-Em comparação a um \textit{phased array}, um radar MIMO consegue obter um resulado similar sem recorrer a mudanças de fase ou canais de frequência separados. No entanto, resulta num SNR menor.
+Em comparação a um \textit{phased array}, um radar MIMO consegue obter um resultado similar sem recorrer a mudanças de fase ou canais de frequência separados. No entanto, resulta num SNR menor.
 
 \subsection{Radar Além-Horizonte}
 
@@ -374,7 +383,7 @@ No entanto, o uso extensivo da atmosfera como modo de propagação implica o acr
 
 Não só existem estes problemas como também pode ocorrer interferência do mesmo sinal através de trajetos diferentes para o mesmo alvo, como exemplificado na figura \ref{fig:oth}. Isto resulta no mesmo sinal a ser recebido com ângulos de envio e receção diferentes.
 
-Quando o \textit{clutter} viaja com ângulos de incidência e receção diferentes do sinal de ilumniação, é possível colocar um anulador de transmissão no ângulo do \textit{clutter} para melhorar a deteção do alvo. No entanto, os ângulos envolvidos neste cálculo não são conhecidos antes da transmissão, pelo que colocar o anulador nem sempre garante melhoria.
+Quando o \textit{clutter} viaja com ângulos de incidência e receção diferentes do sinal de iluminação, é possível colocar um anulador de transmissão no ângulo do \textit{clutter} para melhorar a deteção do alvo. No entanto, os ângulos envolvidos neste cálculo não são conhecidos antes da transmissão, pelo que colocar o anulador nem sempre garante melhoria.
 
 Utilizando um radar MIMO o anulador de transmissão pode ser ajustado de acordo com a distância ao alvo, pelo que a deteção é melhorada a todas as distâncias dentro do alcance do radar.
 
@@ -393,7 +402,7 @@ As tarefas de processamento principais em radar são:
   \item Rejeição de \textit{clutter}.
 \end{itemize}
 
-Para o efeito de analizar a complexidade computacional, os primeiros dois passos são considerados parte de pré-processamento.
+Para o efeito de analisar a complexidade computacional, os primeiros dois passos são considerados parte de pré-processamento.
 A equação \ref{eq:ops_pre} revela a fração de FLOPS\footnote{\textit{floating point operations per second}} quando se usa um radar MIMO com $M$ formas de onda, $N$ recetores e $L$ \textit{bins} no alcance.
 \begin{align}
   f_{pre}=1+\frac{\log_2 N}{\log_2 (LM)}.
@@ -415,7 +424,7 @@ Isto mostra que no mínimo temos o dobro da carga computacional ao usar MIMO, o 
 Para além do aumento da computação necessária para a rejeição do \textit{clutter}, o aumentado número de graus de liberdade também complica o próprio porcesso no caso de \textit{clutter} heterogéneo. 
 Normalmente, a eliminação do \textit{clutter} é feita usando \textit{training data} na dimensão do alcance, e geralmente devem usar-se um número de amostras na ordem dos graus de liberdade, o que se torna ainda mais difícil com o aumento de formas de onda distintas.
 
-As soluções com melhor potencial involvem usar conhecimento \emph{a priori} do ambiente de \textit{clutter} para remover qualquer tendência antes do processamento adaptativo, são chamadas de \textit{knowledge-aided space-time adaptative processing}, KA-STAP.
+As soluções com melhor potencial envolvem usar conhecimento \emph{a priori} do ambiente de \textit{clutter} para remover qualquer tendência antes do processamento adaptativo, são chamadas de \textit{knowledge-aided space-time adaptative processing}, KA-STAP.
 
 \section{Conclusões}
 
